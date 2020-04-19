@@ -1,7 +1,7 @@
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
 
-interface Execute {
+interface ExecuteDTO {
   title: string;
   value: number;
   type: 'income' | 'outcome';
@@ -14,7 +14,7 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute({ title, value, type }: Execute): Transaction {
+  public execute({ title, value, type }: ExecuteDTO): Transaction {
     if (type === 'outcome' && value > this.transactionsRepository.getTotal()) {
       throw Error('Transaction not accepted, please check again!');
     }
